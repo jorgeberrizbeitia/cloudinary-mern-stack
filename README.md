@@ -1,11 +1,13 @@
 # CLOUDINARY SETUP FOR MERN STACK
 
-This code includes the full setup for cloudinary in a Mern Stack App.
+This code includes the basic setup for cloudinary in a MERN Stack App.
 Code included is for both Server and Client side.
+
+You can follow below Instructions below to add the functionality to your current code or see the code inside the repository server/client for an example of Create and Read of a document with an image property uploaded through cloudinary.
 
 ***
 
-## CLOUDINARY REGISTER
+## Step 1. CLOUDINARY REGISTER
 
 1. Create an account or log into [Cloudinary](https://cloudinary.com/)
 
@@ -13,7 +15,7 @@ Code included is for both Server and Client side.
 
 ***
 
-## BACKEND CONFIG STEPS. Apply all below steps on your Server.
+## Step 2. BACKEND CONFIG. Apply all below steps on your Server.
 
 1. Install the 3 packages needed for the process.
 
@@ -100,7 +102,7 @@ router.post("/", uploader.single("image"), (req, res, next) => {
 module.exports = router;
 ```
 
-## FRONTEND CONFIG STEPS. Apply all below steps on your Client.
+## Step 3. FRONTEND CONFIG. Apply all below steps on your Client.
 
 1. Add a service to contact the backend route that will send the image to cloudinary.
 
@@ -181,10 +183,10 @@ const handleFileUpload = async (event) => {
 {imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null;}
 ```
 
-4. Continue with a regular flow of creating a Document.
+5. Continue with a regular flow of creating a Document.
 
 - Use the other input fields and their values stored in states like title, description, etc.
 - On the handleSubmit use all info for creating/updating the document, including the imageUrl from the state.
 - Use the service for creating/updating a Document with above values.
 
-## NOTE: you can see the file in the repository to see a bit more of the execution.
+Note: Once you are done with the steps and if you still have doubts, try checking the code in the repository for an example of the implementation.
