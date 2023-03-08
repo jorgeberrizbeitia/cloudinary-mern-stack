@@ -104,7 +104,7 @@ module.exports = router;
 
 ## Step 3. FRONTEND CONFIG. Apply all below steps on your Client.
 
-1. Add a service to contact the backend route that will send the image to cloudinary.
+1. (Only if using services) Add a service to contact the backend route that will send the image to cloudinary.
 
 ```jsx
 // in upload.services.js
@@ -118,7 +118,7 @@ const uploadImageService = (imageFile) => {
 export { uploadImageService };
 ```
 
-2. Go to the component where you have a form that is creating or updating a new Document. Import the service, create the following two states and the uploading function handler that is called when the button of the input type `file` is clicked.
+2. Go to the component where you have a form that is creating or updating a new Document. Import the service (if using services), create below two states and the uploading function handler that is called when the button of the input type `file` is clicked.
 
 ```javascript
 // add to component where you are creating an item
@@ -149,6 +149,9 @@ const handleFileUpload = async (event) => {
 
   try {
     const response = await uploadImageService(uploadData);
+    // or below line if not using services
+    // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
+
     setImageUrl(response.data.imageUrl);
     //                          |
     //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
@@ -160,7 +163,7 @@ const handleFileUpload = async (event) => {
 };
 ```
 
-4. Then in the same component, add the following to the creation form where the input to select an image is.
+4. Then, in the same component, add the following input to allow the user to select an image, as well as a loading animation section and image preview.
 
 ```jsx
 // ... in the JSX returned of the same component as above.
@@ -186,7 +189,7 @@ const handleFileUpload = async (event) => {
 5. Continue with a regular flow of creating a Document.
 
 - Use the other input fields and their values stored in states like title, description, etc.
-- On the handleSubmit use all info for creating/updating the document, including the imageUrl from the state.
+- On the handleSubmit of the form use all info for creating/updating the document, including the imageUrl from the state.
 - Use the service for creating/updating a Document with above values.
 
-Note: Once you are done with the steps and if you still have doubts, try checking the code in the repository for an example of the implementation.
+### Note: Once you are done with the steps and if you still have doubts, try checking the code in the repository for an example of the implementation.
