@@ -22,11 +22,15 @@ function List() {
     }
   };
 
+  if (isFetching === true) {
+    return <h3>... loading</h3>
+  }
+
   return (
     <div>
       <h1>List of Items</h1>
 
-      {isFetching === false ? (
+      {allItems.length > 0 ? (
         <div>
           {allItems.map((eachItem) => {
             return (
@@ -40,7 +44,7 @@ function List() {
           })}
         </div>
       ) : (
-        <h3>... loading</h3>
+        <h3>There are no items</h3>
       )}
     </div>
   );
