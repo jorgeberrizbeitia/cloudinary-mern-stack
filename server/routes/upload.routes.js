@@ -7,7 +7,9 @@ router.post("/", uploader.single("image"), (req, res, next) => {
   // console.log("file is: ", req.file);
 
   if (!req.file) {
-    next("No file uploaded!");
+    res.status(400).json({
+      errorMessage: "There was a problem uploading the image. Check image format and size."
+    })
     return;
   }
 
