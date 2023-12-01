@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createOneItemService } from "../services/item.services";
-import { uploadImageService } from "../services/upload.services";
+import axios from "axios"
 
 function Create() {
   const navigate = useNavigate();
@@ -31,7 +30,9 @@ function Create() {
     //     this name needs to match the name used in the middleware => uploader.single("image")
 
     try {
-      const response = await uploadImageService(uploadData);
+      const response = axios.post("http://localhost:5005/api/upload", uploadData)
+      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+
       setImageUrl(response.data.imageUrl);
       //                          |
       //     this is how the backend sends the image in the frontend => res.json({ imageUrl: req.file.path });
@@ -52,7 +53,9 @@ function Create() {
 
     try {
 
-      await createOneItemService(newItem)
+      await axios.post("http://localhost:5005/api/item", newItem)
+      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+
       navigate("/item/list")
 
     } catch (error) {
