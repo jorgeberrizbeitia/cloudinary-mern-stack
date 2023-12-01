@@ -104,28 +104,10 @@ module.exports = router;
 
 ## Step 3. FRONTEND CONFIG. Apply all below steps on your Client.
 
-1. (Only if using services) Add a service to contact the backend route that will send the image to cloudinary.
-
-```jsx
-// in upload.services.js
-
-import service from "./config.services";
-
-const uploadImageService = (imageFile) => {
-  return service.post("/upload", imageFile);
-};
-
-export { uploadImageService };
-```
-
-2. Go to the component where you have a form that is creating or updating a new Document. Import the service (if using services), create below two states and the uploading function handler that is called when the button of the input type `file` is clicked.
+2. Go to the component where you have a form that is creating or updating a new Document. Create below two states and the uploading function handler that is called when the button of the input type `file` is clicked.
 
 ```javascript
 // add to component where you are creating an item
-
-import { uploadImageService } from "../services/upload.services";
-
-// ...
 
 // below state will hold the image URL from cloudinary. This will come from the backend.
 const [imageUrl, setImageUrl] = useState(null); 
@@ -145,10 +127,12 @@ const handleFileUpload = async (event) => {
   const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
   uploadData.append("image", event.target.files[0]);
   //                   |
-  //     this name needs to match the name used in the middleware => uploader.single("image")
+  //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
 
   try {
-    const response = await uploadImageService(uploadData);
+    const response = axios.post("http://localhost:5005/api/upload", uploadData)
+    // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+
     // or below line if not using services
     // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
 
