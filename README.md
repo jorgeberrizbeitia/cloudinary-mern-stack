@@ -133,11 +133,8 @@ const handleFileUpload = async (event) => {
   //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
 
   try {
-    const response = axios.post("http://localhost:5005/api/upload", uploadData)
+    const response = await axios.post("http://localhost:5005/api/upload", uploadData)
     // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
-
-    // or below line if not using services
-    // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
 
     setImageUrl(response.data.imageUrl);
     //                          |
