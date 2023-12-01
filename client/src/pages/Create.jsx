@@ -30,7 +30,7 @@ function Create() {
     //     this name needs to match the name used in the middleware => uploader.single("image")
 
     try {
-      const response = axios.post("http://localhost:5005/api/upload", uploadData)
+      const response = await axios.post("http://localhost:5005/api/upload", uploadData)
       // !IMPORTANT: Adapt the request structure to the one in your project (services, .env, auth, etc...)
 
       setImageUrl(response.data.imageUrl);
