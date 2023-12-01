@@ -31,7 +31,7 @@ function Create() {
 
     try {
       const response = axios.post("http://localhost:5005/api/upload", uploadData)
-      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+      // !IMPORTANT: Adapt the request structure to the one in your project (services, .env, auth, etc...)
 
       setImageUrl(response.data.imageUrl);
       //                          |
@@ -54,7 +54,7 @@ function Create() {
     try {
 
       await axios.post("http://localhost:5005/api/item", newItem)
-      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+      // !IMPORTANT: Adapt the request structure to the one in your project (services, .env, auth, etc...)
 
       navigate("/item/list")
 

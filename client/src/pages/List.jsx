@@ -15,7 +15,7 @@ function List() {
   const getData = async () => {
     try {
       const response = await axios.get("http://localhost:5005/api/item");
-      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+      // !IMPORTANT: Adapt the request structure to the one in your project (services, .env, auth, etc...)
 
       setAllItems(response.data);
       setIsFetching(false);
